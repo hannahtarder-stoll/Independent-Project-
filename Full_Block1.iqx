@@ -1,0 +1,979 @@
+﻿<item object_a1>
+/1= "Stimuli/Objects/001.jpg"
+/2= "Stimuli/Objects/002.jpg"
+/3= "Stimuli/Objects/003.jpg"
+/4= "Stimuli/Objects/004.jpg"
+/5= "Stimuli/Objects/005.jpg"
+/6= "Stimuli/Objects/006.jpg"
+</item>
+
+<item object_b1>
+/1= "Stimuli/Objects/007.jpg"
+/2= "Stimuli/Objects/008.jpg"
+/3= "Stimuli/Objects/009.jpg"
+/4= "Stimuli/Objects/010.jpg"
+/5= "Stimuli/Objects/011.jpg"
+/6= "Stimuli/Objects/012.jpg"
+</item>
+
+<item keyboard_enc>
+/1= "Stimuli/Keyboard/keyboard_enc.jpg"
+</item>
+
+<item keyboard_enc_choosej>
+/1= "Stimuli/Keyboard/keyboard_enc_choosej.jpg"
+</item>
+
+<item keyboard_enc_choosek>
+/1= "Stimuli/Keyboard/keyboard_enc_choosek.jpg"
+</item>
+
+<item white_screen>
+/1= "Stimuli/White_Screen/White_Screen.jpg"
+</item>
+
+<values>
+/trial_start_time_prescene_b1 = -1
+/trial_end_time_prescene_b1 = -1
+</values>
+
+<picture object_a1>
+/items= object_a1 
+/position= (25%,40%)
+/size=(500px,500px)
+/select= sequence 
+/ erase = False
+</picture>
+
+<picture object_b1>
+/items= object_b1
+/position= (75%,40%)
+/size= (500px,500px)
+/select= sequence
+/ erase = False
+</picture>
+
+<picture keyboard_enc>
+/ items = item.keyboard_enc 
+/ select = 1
+/ size = (25%,25%)
+/ position = (50%,80%)
+</picture>  
+
+<picture keyboard_enc_choosej>
+/ items = item.keyboard_enc_choosej
+/ select = 1
+/size= (25%,25%)
+/position= (50%,80%)
+</picture>
+
+<picture keyboard_enc_choosek>
+/ items = item.keyboard_enc_choosek
+/ select = 1
+/ size = (25%,25%)
+/ position = (50%,80%)
+</picture>
+
+<picture white_screen>
+/ items = item.white_screen
+/ size = (100%,100%)
+/ position = (50%,50%)
+/erase= False
+</picture>
+
+<text dummy>
+/items= ("x")
+/color= white
+/position= (0,0)
+</text>
+
+<text fixation>
+/items= ("+")
+/fontstyle= ("Arial", 60pt, true)
+/position= (50%,50%)
+/erase=true(white)
+</text>
+
+<trial white_screen>
+/ stimulustimes = [0=white_screen]
+/ timeout = 1000
+</trial>
+
+<trial enc_object1>
+/ stimulustimes = [0=white_screen,fixation; 500=white_screen,object_a1, object_b1, keyboard_enc]
+/ validresponse = ("j","k") 
+/ beginresponsetime = 500
+/ responseinterrupt = frames
+/ timeout = 4000
+/ branch = [
+	if (trial.enc_object1.response == 36) trial.keyboard_enc1_choosej
+]
+/ branch = [
+	if (trial.enc_object1.response == 37) trial.keyboard_enc1_choosek
+]
+/ ontrialbegin = [
+	values.trial_start_time_prescene_b1 = script.elapsedtime
+]
+</trial>
+
+<trial keyboard_enc1_choosej>
+/ stimulusframes = [1=keyboard_enc_choosej]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<trial keyboard_enc1_choosek>
+/ stimulusframes = [1=keyboard_enc_choosek]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<block encoding1>
+/trials= [1=white_screen;2-7=sequence(enc_object1)]
+</block>
+
+###############################################################################################################################
+Reward
+###############################################################################################################################
+
+<item fractal_a>
+/1= "Stimuli/Fractals/F000.png"
+/2= "Stimuli/Fractals/F001.png"
+/3= "Stimuli/Fractals/F002.png"
+/4= "Stimuli/Fractals/F003.png"
+</item>
+
+<item fractal_b>
+/1= "Stimuli/Fractals/F004.png"
+/2= "Stimuli/Fractals/F005.png"
+/3= "Stimuli/Fractals/F006.png"
+/4= "Stimuli/Fractals/F007.png"
+</item>
+
+<item outcome>
+/1= "100 points!"
+</item>
+
+<item keyboard_reward>
+/1= "Stimuli/Keyboard/keyboard_reward.jpeg"
+</item>
+
+<item keyboard_reward_choosej>
+/1= "Stimuli/Keyboard/keyboard_reward_choosej.jpeg"
+</item>
+
+<item keyboard_reward_choosek>
+/1= "Stimuli/Keyboard/keyboard_reward_choosek.jpeg"
+</item>
+
+<picture fractal_a>
+/items= fractal_a
+/position= (25%,40%)
+/size= (500px, 500px)
+/select= replace
+/erase=false
+</picture>
+
+<picture fractal_b>
+/items= fractal_b
+/position= (75%,40%)
+/size= (500px,500px)
+/ select = replace
+/erase=false 
+</picture>
+
+<picture keyboard_reward>
+/ items = item.keyboard_reward 
+/ select = 1
+/ size = (25%,25%)
+/ position = (50%,80%)
+</picture>  
+
+<picture keyboard_reward_choosej>
+/ items = item.keyboard_reward_choosej
+/ select = 1
+/size= (25%,25%)
+/position= (50%,80%)
+</picture>
+
+<picture keyboard_reward_choosek>
+/ items = item.keyboard_reward_choosek
+/ select = 1
+/ size = (25%,25%)
+/ position = (50%,80%)
+</picture>
+
+<text rewardFB>
+/items= outcome
+/ fontstyle = ("Arial", 60pt, true)
+/position= (50%,50%)
+</text>
+
+<text NoRewardResponse>
+/items= ("Too Slow!")
+/ fontstyle = ("Arial", 60pt, true)
+/position= (50%,50%)
+</text>
+
+<trial reward>
+/ stimulustimes = [0=white_Screen, fixation; 500=white_screen, fractal_a, fractal_b,keyboard_reward]
+/ validresponse = ("j","k") 
+/ beginresponsetime = 500
+/ responseinterrupt = trial
+/ timeout = 2500
+/ correctresponse = (trial.reward.response)
+/ branch = [
+	if (trial.reward.response == 36) trial.keyboard_reward_choosej
+]
+/ branch = [
+	if (trial.reward.response == 37) trial.keyboard_reward_choosek
+]
+/ ontrialbegin = [
+	values.trial_start_time_prescene_b1 = script.elapsedtime
+]
+/ responsetrial = (Noresponse, NoRewardResponse) 
+</trial>
+
+<trial keyboard_reward_choosej>
+/ stimulusframes = [1=keyboard_reward_choosej]
+/ timeout = 2500 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+/ responsetrial = (noresponse, rewardOutcome)
+</trial>
+
+<trial keyboard_reward_choosek>
+/ stimulusframes = [1=keyboard_reward_choosek]
+/ timeout = 2500 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+/ responsetrial = (noresponse, rewardOutcome)
+</trial>
+
+<trial rewardOutcome>
+/ stimulustimes = [0=white_Screen, fixation; 2000=rewardFB; 3500=dummy]
+/ responseinterrupt = trial
+/ timeout = 3500
+</trial>
+
+<trial NoRewardResponse>
+/ stimulustimes = [0=white_Screen, NoRewardResponse; 3500=dummy]
+/ responseinterrupt = trial
+/ timeout = 3500
+</trial>
+
+<block reward>
+/ trials = [1=white_screen;2=replace(reward)]
+</block>
+
+
+###############################################################################################################################
+Flanker
+###############################################################################################################################
+
+<item flanker>
+/1= "Stimuli/Flanker/Flanker1.png"
+/2= "Stimuli/FLanker/Flanker2.png"
+/3= "Stimuli/Flanker/Flanker3.png"
+/4= "Stimuli/Flanker/Flanker4.png"
+</item>
+
+<item keyboard_flanker>
+/1= "Stimuli/Keyboard/keyboard_flanker.jpeg"
+</item>
+
+<item keyboard_flanker_choosej>
+/1= "Stimuli/Keyboard/keyboard_flanker_choosej.jpeg"
+</item>
+
+<item keyboard_flanker_choosek>
+/1= "Stimuli/Keyboard/keyboard_flanker_choosek.jpeg"
+</item>
+
+<picture flanker>
+/items= flanker
+/position= (50%,40%)
+/size= (500px,500px)
+/select= replace 
+/ erase = false
+</picture>
+
+<picture keyboard_flanker>
+/ items = item.keyboard_flanker 
+/ select = 1
+/ size = (25%,25%)
+/ position = (50%,80%)
+</picture>  
+
+<picture keyboard_flanker_choosej>
+/ items = item.keyboard_flanker_choosej
+/ select = 1
+/size= (25%,25%)
+/position= (50%,80%)
+</picture>
+
+<picture keyboard_flanker_choosek>
+/ items = item.keyboard_flanker_choosek
+/ select = 1
+/ size = (25%,25%)
+/ position = (50%,80%)
+</picture>
+
+<trial flanker>
+/ stimulustimes = [0=white_Screen, fixation; 500=white_screen, flanker, keyboard_flanker]
+/ validresponse = ("j","k") 
+/ beginresponsetime = 500
+/ responseinterrupt = frames
+/ timeout = 2500
+/ branch = [
+	if (trial.flanker.response == 36) trial.keyboard_flanker_choosej
+]
+/ branch = [
+	if (trial.flanker.response == 37) trial.keyboard_flanker_choosek
+]
+/ ontrialbegin = [
+	values.trial_start_time_prescene_b1 = script.elapsedtime
+]
+</trial>
+
+<trial keyboard_flanker_choosej>
+/ stimulusframes = [1=keyboard_flanker_choosej]
+/ timeout = 2500 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<trial keyboard_flanker_choosek>
+/ stimulusframes = [1=keyboard_flanker_choosek]
+/ timeout = 2500 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+
+<block flanker>
+/trials= [1=white_screen;2-5=replace(flanker)]
+</block>
+
+#######################################################################
+Encoding 2
+#######################################################################
+
+<item object_a2>
+/1= "Stimuli/Objects/013.jpg"
+/2= "Stimuli/Objects/014.jpg"
+/3= "Stimuli/Objects/015.jpg"
+/4= "Stimuli/Objects/016.jpg"
+/5= "Stimuli/Objects/017.jpg"
+/6= "Stimuli/Objects/018.jpg"
+</item>
+
+<item object_b2>
+/1= "Stimuli/Objects/019.jpg"
+/2= "Stimuli/Objects/020.jpg"
+/3= "Stimuli/Objects/021.jpg"
+/4= "Stimuli/Objects/022.jpg"
+/5= "Stimuli/Objects/023.jpg"
+/6= "Stimuli/Objects/024.jpg"
+</item>
+
+<picture object_a2>
+/items= object_a2 
+/position= (25%,40%)
+/size=(500px,500px)
+/select= sequence 
+</picture>
+
+<picture object_b2>
+/items= object_b2
+/position= (75%,40%)
+/size= (500px,500px)
+/select= sequence
+</picture>
+
+<trial enc_object2>
+/ stimulustimes = [0=fixation; 500=white_screen, object_a2, object_b2, keyboard_enc;3999=dummy]
+/ validresponse = ("j","k") 
+/ beginresponsetime = 500
+/ responseinterrupt = frames
+/ timeout = 4000
+/ branch = [
+	if (trial.enc_object1.response == "j") trial.keyboard_enc2_choosej
+]
+/ branch = [
+	if (trial.enc_object1.response == "k") trial.keyboard_enc2_choosek
+]
+/ ontrialbegin = [
+	values.trial_start_time_prescene_b1 = script.elapsedtime
+]
+</trial>
+
+<trial keyboard_enc2_choosej>
+/ stimulusframes = [1=keyboard_enc_choosej]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<trial keyboard_enc2_choosek>
+/ stimulusframes = [1=keyboard_enc_choosek]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<block encoding2>
+/trials= [1=white_screen;2-7=sequence(enc_object2)]
+</block>
+
+#######################################################################
+Encoding 3
+#######################################################################
+<item object_a3>
+/1= "Stimuli/Objects/025.jpg"
+/2= "Stimuli/Objects/026.jpg"
+/3= "Stimuli/Objects/027.jpg"
+/4= "Stimuli/Objects/028.jpg"
+/5= "Stimuli/Objects/029.jpg"
+/6= "Stimuli/Objects/030.jpg"
+</item>
+
+<item object_b3>
+/1= "Stimuli/Objects/031.jpg"
+/2= "Stimuli/Objects/032.jpg"
+/3= "Stimuli/Objects/033.jpg"
+/4= "Stimuli/Objects/034.jpg"
+/5= "Stimuli/Objects/035.jpg"
+/6= "Stimuli/Objects/036.jpg"
+</item>
+
+<picture object_a3>
+/items= object_a3 
+/position= (25%,40%)
+/size=(500px,500px)
+/select= sequence 
+</picture>
+
+<picture object_b3>
+/items= object_b3
+/position= (75%,40%)
+/size= (500px,500px)
+/select= sequence
+</picture>
+
+<trial enc_object3>
+/ stimulustimes = [0=fixation; 500=white_screen, object_a3, object_b3, keyboard_enc;3999=dummy]
+/ validresponse = ("j","k") 
+/ beginresponsetime = 500
+/ responseinterrupt = frames
+/ timeout = 4000
+/ branch = [
+	if (trial.enc_object1.response == "j") trial.keyboard_enc3_choosej
+]
+/ branch = [
+	if (trial.enc_object1.response == "k") trial.keyboard_enc3_choosek
+]
+/ ontrialbegin = [
+	values.trial_start_time_prescene_b1 = script.elapsedtime
+]
+</trial>
+
+<trial keyboard_enc3_choosej>
+/ stimulusframes = [1=keyboard_enc_choosej]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<trial keyboard_enc3_choosek>
+/ stimulusframes = [1=keyboard_enc_choosek]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<block encoding3>
+/trials= [1=white_screen;2-7=sequence(enc_object3)]
+</block>
+
+#######################################################################
+Encoding 4
+#######################################################################
+
+<item object_a4>
+/1= "Stimuli/Objects/037.jpg"
+/2= "Stimuli/Objects/038.jpg"
+/3= "Stimuli/Objects/039.jpg"
+/4= "Stimuli/Objects/040.jpg"
+/5= "Stimuli/Objects/041.jpg"
+/6= "Stimuli/Objects/042.jpg"
+</item>
+
+<item object_b4>
+/1= "Stimuli/Objects/043.jpg"
+/2= "Stimuli/Objects/044.jpg"
+/3= "Stimuli/Objects/045.jpg"
+/4= "Stimuli/Objects/046.jpg"
+/5= "Stimuli/Objects/047.jpg"
+/6= "Stimuli/Objects/048.jpg"
+</item>
+
+<picture object_a4>
+/items= object_a4 
+/position= (25%,40%)
+/size=(500px,500px)
+/select= sequence 
+</picture>
+
+<picture object_b4>
+/items= object_b4
+/position= (75%,40%)
+/size= (500px,500px)
+/select= sequence
+</picture>
+
+<trial enc_object4>
+/ stimulustimes = [0=fixation; 500=white_screen, object_a4, object_b4, keyboard_enc;3999=dummy]
+/ validresponse = ("j","k") 
+/ beginresponsetime = 500
+/ responseinterrupt = frames
+/ timeout = 4000
+/ branch = [
+	if (trial.enc_object1.response == "j") trial.keyboard_enc4_choosej
+]
+/ branch = [
+	if (trial.enc_object1.response == "k") trial.keyboard_enc4_choosek
+]
+/ ontrialbegin = [
+	values.trial_start_time_prescene_b1 = script.elapsedtime
+]
+</trial>
+
+<trial keyboard_enc4_choosej>
+/ stimulusframes = [1=keyboard_enc_choosej]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<trial keyboard_enc4_choosek>
+/ stimulusframes = [1=keyboard_enc_choosek]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<block encoding4>
+/trials= [1=white_screen;2-7=sequence(enc_object4)]
+</block>
+
+#######################################################################
+Encoding 5
+#######################################################################
+<item object_a5>
+/1= "Stimuli/Objects/049.jpg"
+/2= "Stimuli/Objects/050.jpg"
+/3= "Stimuli/Objects/051.jpg"
+/4= "Stimuli/Objects/052.jpg"
+/5= "Stimuli/Objects/053.jpg"
+/6= "Stimuli/Objects/054.jpg"
+</item>
+
+<item object_b5>
+/1= "Stimuli/Objects/055.jpg"
+/2= "Stimuli/Objects/056.jpg"
+/3= "Stimuli/Objects/057.jpg"
+/4= "Stimuli/Objects/058.jpg"
+/5= "Stimuli/Objects/059.jpg"
+/6= "Stimuli/Objects/060.jpg"
+</item>
+
+<picture object_a5>
+/items= object_a5 
+/position= (25%,40%)
+/size=(500px,500px)
+/select= sequence 
+</picture>
+
+<picture object_b5>
+/items= object_b5
+/position= (75%,40%)
+/size= (500px,500px)
+/select= sequence
+</picture>
+
+<trial enc_object5>
+/ stimulustimes = [0=fixation; 500=white_screen, object_a5, object_b5, keyboard_enc;3999=dummy]
+/ validresponse = ("j","k") 
+/ beginresponsetime = 500
+/ responseinterrupt = frames
+/ timeout = 4000
+/ branch = [
+	if (trial.enc_object1.response == "j") trial.keyboard_enc5_choosej
+]
+/ branch = [
+	if (trial.enc_object1.response == "k") trial.keyboard_enc5_choosek
+]
+/ ontrialbegin = [
+	values.trial_start_time_prescene_b1 = script.elapsedtime
+]
+</trial>
+
+<trial keyboard_enc5_choosej>
+/ stimulusframes = [1=keyboard_enc_choosej]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<trial keyboard_enc5_choosek>
+/ stimulusframes = [1=keyboard_enc_choosek]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<block encoding5>
+/trials= [1=white_screen;2-7=sequence(enc_object5)]
+</block>
+
+#######################################################################
+Encoding 6
+#######################################################################
+
+<item object_a6>
+/1= "Stimuli/Objects/061.jpg"
+/2= "Stimuli/Objects/062.jpg"
+/3= "Stimuli/Objects/063.jpg"
+/4= "Stimuli/Objects/064.jpg"
+/5= "Stimuli/Objects/065.jpg"
+/6= "Stimuli/Objects/066.jpg"
+</item>
+
+<item object_b6>
+/1= "Stimuli/Objects/067.jpg"
+/2= "Stimuli/Objects/068.jpg"
+/3= "Stimuli/Objects/069.jpg"
+/4= "Stimuli/Objects/070.jpg"
+/5= "Stimuli/Objects/071.jpg"
+/6= "Stimuli/Objects/072.jpg"
+</item>
+
+<picture object_a6>
+/items= object_a6 
+/position= (25%,40%)
+/size=(500px,500px)
+/select= sequence 
+</picture>
+
+<picture object_b6>
+/items= object_b6
+/position= (75%,40%)
+/size= (500px,500px)
+/select= sequence
+</picture>
+
+<trial enc_object6>
+/ stimulustimes = [0=fixation; 500=white_screen, object_a6, object_b6, keyboard_enc;3999=dummy]
+/ validresponse = ("j","k") 
+/ beginresponsetime = 500
+/ responseinterrupt = frames
+/ timeout = 4000
+/ branch = [
+	if (trial.enc_object1.response == "j") trial.keyboard_enc6_choosej
+]
+/ branch = [
+	if (trial.enc_object1.response == "k") trial.keyboard_enc6_choosek
+]
+/ ontrialbegin = [
+	values.trial_start_time_prescene_b1 = script.elapsedtime
+]
+</trial>
+
+<trial keyboard_enc6_choosej>
+/ stimulusframes = [1=keyboard_enc_choosej]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<trial keyboard_enc6_choosek>
+/ stimulusframes = [1=keyboard_enc_choosek]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<block encoding6>
+/trials= [1=white_screen;2-7=sequence(enc_object6)]
+</block>
+
+#######################################################################
+Encoding 7
+#######################################################################
+<item object_a7>
+/1= "Stimuli/Objects/073.jpg"
+/2= "Stimuli/Objects/074.jpg"
+/3= "Stimuli/Objects/075.jpg"
+/4= "Stimuli/Objects/076.jpg"
+/5= "Stimuli/Objects/077.jpg"
+/6= "Stimuli/Objects/078.jpg"
+</item>
+
+<item object_b7>
+/1= "Stimuli/Objects/079.jpg"
+/2= "Stimuli/Objects/080.jpg"
+/3= "Stimuli/Objects/081.jpg"
+/4= "Stimuli/Objects/082.jpg"
+/5= "Stimuli/Objects/083.jpg"
+/6= "Stimuli/Objects/084.jpg"
+</item>
+
+<picture object_a7>
+/items= object_a7 
+/position= (25%,40%)
+/size=(500px,500px)
+/select= sequence 
+</picture>
+
+<picture object_b7>
+/items= object_b7
+/position= (75%,40%)
+/size= (500px,500px)
+/select= sequence
+</picture>
+
+<trial enc_object7>
+/ stimulustimes = [0=fixation; 500=white_screen, object_a7, object_b7, keyboard_enc;3999=dummy]
+/ validresponse = ("j","k") 
+/ beginresponsetime = 500
+/ responseinterrupt = frames
+/ timeout = 4000
+/ branch = [
+	if (trial.enc_object1.response == "j") trial.keyboard_enc7_choosej
+]
+/ branch = [
+	if (trial.enc_object1.response == "k") trial.keyboard_enc7_choosek
+]
+/ ontrialbegin = [
+	values.trial_start_time_prescene_b1 = script.elapsedtime
+]
+</trial>
+
+<trial keyboard_enc7_choosej>
+/ stimulusframes = [1=keyboard_enc_choosej]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<trial keyboard_enc7_choosek>
+/ stimulusframes = [1=keyboard_enc_choosek]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<block encoding7>
+/trials= [1=white_screen;2-7=sequence(enc_object7)]
+</block>
+
+#######################################################################
+Encoding 8
+#######################################################################
+<item object_a8>
+/1= "Stimuli/Objects/085.jpg"
+/2= "Stimuli/Objects/086.jpg"
+/3= "Stimuli/Objects/087.jpg"
+/4= "Stimuli/Objects/088.jpg"
+/5= "Stimuli/Objects/089.jpg"
+/6= "Stimuli/Objects/090.jpg"
+</item>
+
+<item object_b8>
+/1= "Stimuli/Objects/091.jpg"
+/2= "Stimuli/Objects/092.jpg"
+/3= "Stimuli/Objects/093.jpg"
+/4= "Stimuli/Objects/094.jpg"
+/5= "Stimuli/Objects/095.jpg"
+/6= "Stimuli/Objects/096.jpg"
+</item>
+
+<picture object_a8>
+/items= object_a8 
+/position= (25%,40%)
+/size=(500px,500px)
+/select= sequence 
+</picture>
+
+<picture object_b8>
+/items= object_b8
+/position= (75%,40%)
+/size= (500px,500px)
+/select= sequence
+</picture>
+
+<trial enc_object8>
+/ stimulustimes = [0=fixation; 500=white_screen, object_a8, object_b8, keyboard_enc;3999=dummy]
+/ validresponse = ("j","k") 
+/ beginresponsetime = 500
+/ responseinterrupt = frames
+/ timeout = 4000
+/ branch = [
+	if (trial.enc_object1.response == "j") trial.keyboard_enc8_choosej
+]
+/ branch = [
+	if (trial.enc_object1.response == "k") trial.keyboard_enc8_choosek
+]
+/ ontrialbegin = [
+	values.trial_start_time_prescene_b1 = script.elapsedtime
+]
+</trial>
+
+<trial keyboard_enc8_choosej>
+/ stimulusframes = [1=keyboard_enc_choosej]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<trial keyboard_enc8_choosek>
+/ stimulusframes = [1=keyboard_enc_choosek]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<block encoding8>
+/trials= [1=white_screen;2-7=sequence(enc_object8)]
+</block>
+
+#######################################################################
+Encoding 9
+#######################################################################
+<item object_a9>
+/1= "Stimuli/Objects/097.jpg"
+/2= "Stimuli/Objects/098.jpg"
+/3= "Stimuli/Objects/099.jpg"
+/4= "Stimuli/Objects/100.jpg"
+/5= "Stimuli/Objects/101.jpg"
+/6= "Stimuli/Objects/102.jpg"
+</item>
+
+<item object_b9>
+/1= "Stimuli/Objects/103.jpg"
+/2= "Stimuli/Objects/104.jpg"
+/3= "Stimuli/Objects/105.jpg"
+/4= "Stimuli/Objects/106.jpg"
+/5= "Stimuli/Objects/107.jpg"
+/6= "Stimuli/Objects/108.jpg"
+</item>
+
+<picture object_a9>
+/items= object_a9 
+/position= (25%,40%)
+/size=(500px,500px)
+/select= sequence 
+</picture>
+
+<picture object_b9>
+/items= object_b9
+/position= (75%,40%)
+/size= (500px,500px)
+/select= sequence
+</picture>
+
+
+
+<trial enc_object9>
+/ stimulustimes = [0=fixation; 500=white_screen, object_a9, object_b9, keyboard_enc;3999=dummy]
+/ validresponse = ("j","k") 
+/ beginresponsetime = 500
+/ responseinterrupt = frames
+/ timeout = 4000
+/ branch = [
+	if (trial.enc_object1.response == "j") trial.keyboard_enc9_choosej
+]
+/ branch = [
+	if (trial.enc_object1.response == "k") trial.keyboard_enc9_choosek
+]
+/ ontrialbegin = [
+	values.trial_start_time_prescene_b1 = script.elapsedtime
+]
+</trial>
+
+<trial keyboard_enc9_choosej>
+/ stimulusframes = [1=keyboard_enc_choosej]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<trial keyboard_enc9_choosek>
+/ stimulusframes = [1=keyboard_enc_choosek]
+/ timeout = 4000 - (values.trial_end_time_prescene_b1 - values.trial_start_time_prescene_b1)
+/ ontrialbegin = [
+	values.trial_end_time_prescene_b1 = script.elapsedtime
+]
+/ recorddata = false
+</trial>
+
+<block encoding9>
+/trials= [1=white_screen;2-7=sequence(enc_object9)]
+</block>
+
+<expt block1>
+/ blocks = [1=encoding1;2=reward;3=flanker;
+4=encoding2;5=reward;6=flanker;
+7=encoding3;8=reward;9=flanker;
+10=encoding4;11=reward;12=flanker;
+13=encoding5;14=reward;15=flanker;
+16=encoding6;17=reward;18=flanker;
+19=encoding7;20=reward;21=flanker;
+22=encoding8;23=reward;24=flanker;
+25=encoding9;26=reward;27=flanker]
+</expt>
