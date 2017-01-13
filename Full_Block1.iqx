@@ -1,4 +1,63 @@
-﻿<item object_a1>
+﻿<include>
+/file= "CB_Files copy/1_b1_include_file.txt"
+/ precondition = [ 
+	script.subjectid==001
+]
+</include>
+
+<include>
+/ file = "CB_Files copy/2_b1_include_file.txt"
+/ precondition = [ 
+	script.subjectid==002
+</include>
+
+<include>
+/ file = "CB_Files copy/3_b1_include_file.txt"
+/ precondition = [ 
+	script.subjectid==003]
+</include>
+
+<include>
+/ file = "CB_Files copy/4_b1_include_file.txt"
+/ precondition = [ 
+	script.subjectid==004
+ ]
+ </include>
+
+<include>
+/ file = "CB_Files copy/5_b1_include_file.txt"
+/ precondition = [ 
+	script.subjectid==005
+]
+</include>
+
+<include>
+/ file = "CB_Files copy/6_b1_include_file.txt"
+/ precondition = [ 
+	script.subjectid==006
+]
+</include>
+
+<include>
+/ file = "CB_Files copy/7_b1_include_file.txt"
+/ precondition = [ 
+	script.subjectid==007
+]
+</include>
+
+<include>
+/ file = "CB_Files copy/8_b1_include_file.txt"
+/ precondition = [ 
+	script.subjectid==008
+]
+</include>
+
+##################################################################################
+Encoding 1
+############################################################################
+ 
+
+<item object_a1>
 /1= "Stimuli/Objects/001.jpg"
 /2= "Stimuli/Objects/002.jpg"
 /3= "Stimuli/Objects/003.jpg"
@@ -139,7 +198,7 @@
 </block>
 
 ###############################################################################################################################
-Reward
+Reward 2
 ###############################################################################################################################
 
 <item fractal_a>
@@ -278,7 +337,7 @@ Reward
 
 
 ###############################################################################################################################
-Flanker
+Flanker 1
 ###############################################################################################################################
 
 <item flanker>
@@ -396,6 +455,7 @@ Encoding 2
 /position= (25%,40%)
 /size=(500px,500px)
 /select= sequence 
+/ erase = false
 </picture>
 
 <picture object_b2>
@@ -403,19 +463,20 @@ Encoding 2
 /position= (75%,40%)
 /size= (500px,500px)
 /select= sequence
+/ erase = false
 </picture>
 
 <trial enc_object2>
-/ stimulustimes = [0=fixation; 500=white_screen, object_a2, object_b2, keyboard_enc;3999=dummy]
+/ stimulustimes = [0=white_screen, fixation; 500=white_screen, object_a2, object_b2, keyboard_enc]
 / validresponse = ("j","k") 
 / beginresponsetime = 500
 / responseinterrupt = frames
 / timeout = 4000
 / branch = [
-	if (trial.enc_object1.response == "j") trial.keyboard_enc2_choosej
+	if (trial.enc_object2.response == 36) trial.keyboard_enc2_choosej
 ]
 / branch = [
-	if (trial.enc_object1.response == "k") trial.keyboard_enc2_choosek
+	if (trial.enc_object2.response == 37) trial.keyboard_enc2_choosek
 ]
 / ontrialbegin = [
 	values.trial_start_time_prescene_b1 = script.elapsedtime
@@ -470,6 +531,7 @@ Encoding 3
 /position= (25%,40%)
 /size=(500px,500px)
 /select= sequence 
+/ erase = false
 </picture>
 
 <picture object_b3>
@@ -477,19 +539,20 @@ Encoding 3
 /position= (75%,40%)
 /size= (500px,500px)
 /select= sequence
+/ erase = false
 </picture>
 
 <trial enc_object3>
-/ stimulustimes = [0=fixation; 500=white_screen, object_a3, object_b3, keyboard_enc;3999=dummy]
+/ stimulustimes = [0=white_screen, fixation; 500=white_screen, object_a3, object_b3, keyboard_enc]
 / validresponse = ("j","k") 
 / beginresponsetime = 500
 / responseinterrupt = frames
 / timeout = 4000
 / branch = [
-	if (trial.enc_object1.response == "j") trial.keyboard_enc3_choosej
+	if (trial.enc_object3.response == 36) trial.keyboard_enc3_choosej
 ]
 / branch = [
-	if (trial.enc_object1.response == "k") trial.keyboard_enc3_choosek
+	if (trial.enc_object3.response == 37) trial.keyboard_enc3_choosek
 ]
 / ontrialbegin = [
 	values.trial_start_time_prescene_b1 = script.elapsedtime
@@ -545,6 +608,7 @@ Encoding 4
 /position= (25%,40%)
 /size=(500px,500px)
 /select= sequence 
+/ erase = false
 </picture>
 
 <picture object_b4>
@@ -552,19 +616,20 @@ Encoding 4
 /position= (75%,40%)
 /size= (500px,500px)
 /select= sequence
+/ erase = false
 </picture>
 
 <trial enc_object4>
-/ stimulustimes = [0=fixation; 500=white_screen, object_a4, object_b4, keyboard_enc;3999=dummy]
+/ stimulustimes = [0=white_screen, fixation; 500=white_screen, object_a4, object_b4, keyboard_enc]
 / validresponse = ("j","k") 
 / beginresponsetime = 500
 / responseinterrupt = frames
 / timeout = 4000
 / branch = [
-	if (trial.enc_object1.response == "j") trial.keyboard_enc4_choosej
+	if (trial.enc_object4.response == 36) trial.keyboard_enc4_choosej
 ]
 / branch = [
-	if (trial.enc_object1.response == "k") trial.keyboard_enc4_choosek
+	if (trial.enc_object4.response == 37) trial.keyboard_enc4_choosek
 ]
 / ontrialbegin = [
 	values.trial_start_time_prescene_b1 = script.elapsedtime
@@ -618,7 +683,8 @@ Encoding 5
 /items= object_a5 
 /position= (25%,40%)
 /size=(500px,500px)
-/select= sequence 
+/select= sequence
+/ erase = false 
 </picture>
 
 <picture object_b5>
@@ -626,19 +692,20 @@ Encoding 5
 /position= (75%,40%)
 /size= (500px,500px)
 /select= sequence
+/ erase = false
 </picture>
 
 <trial enc_object5>
-/ stimulustimes = [0=fixation; 500=white_screen, object_a5, object_b5, keyboard_enc;3999=dummy]
+/ stimulustimes = [0=white_screen, fixation; 500=white_screen, object_a5, object_b5, keyboard_enc]
 / validresponse = ("j","k") 
 / beginresponsetime = 500
 / responseinterrupt = frames
 / timeout = 4000
 / branch = [
-	if (trial.enc_object1.response == "j") trial.keyboard_enc5_choosej
+	if (trial.enc_object5.response == 36) trial.keyboard_enc5_choosej
 ]
 / branch = [
-	if (trial.enc_object1.response == "k") trial.keyboard_enc5_choosek
+	if (trial.enc_object5.response == 37) trial.keyboard_enc5_choosek
 ]
 / ontrialbegin = [
 	values.trial_start_time_prescene_b1 = script.elapsedtime
@@ -694,6 +761,7 @@ Encoding 6
 /position= (25%,40%)
 /size=(500px,500px)
 /select= sequence 
+/ erase = false
 </picture>
 
 <picture object_b6>
@@ -701,19 +769,20 @@ Encoding 6
 /position= (75%,40%)
 /size= (500px,500px)
 /select= sequence
+/ erase = false
 </picture>
 
 <trial enc_object6>
-/ stimulustimes = [0=fixation; 500=white_screen, object_a6, object_b6, keyboard_enc;3999=dummy]
+/ stimulustimes = [0=white_screen, fixation; 500=white_screen, object_a6, object_b6, keyboard_enc]
 / validresponse = ("j","k") 
 / beginresponsetime = 500
 / responseinterrupt = frames
 / timeout = 4000
 / branch = [
-	if (trial.enc_object1.response == "j") trial.keyboard_enc6_choosej
+	if (trial.enc_object6.response == 36) trial.keyboard_enc6_choosej
 ]
 / branch = [
-	if (trial.enc_object1.response == "k") trial.keyboard_enc6_choosek
+	if (trial.enc_object6.response == 37) trial.keyboard_enc6_choosek
 ]
 / ontrialbegin = [
 	values.trial_start_time_prescene_b1 = script.elapsedtime
@@ -768,6 +837,7 @@ Encoding 7
 /position= (25%,40%)
 /size=(500px,500px)
 /select= sequence 
+/ erase = false
 </picture>
 
 <picture object_b7>
@@ -775,19 +845,20 @@ Encoding 7
 /position= (75%,40%)
 /size= (500px,500px)
 /select= sequence
+/ erase = false
 </picture>
 
 <trial enc_object7>
-/ stimulustimes = [0=fixation; 500=white_screen, object_a7, object_b7, keyboard_enc;3999=dummy]
+/ stimulustimes = [0=white_screen, fixation; 500=white_screen, object_a7, object_b7, keyboard_enc]
 / validresponse = ("j","k") 
 / beginresponsetime = 500
 / responseinterrupt = frames
 / timeout = 4000
 / branch = [
-	if (trial.enc_object1.response == "j") trial.keyboard_enc7_choosej
+	if (trial.enc_object7.response == 36) trial.keyboard_enc7_choosej
 ]
 / branch = [
-	if (trial.enc_object1.response == "k") trial.keyboard_enc7_choosek
+	if (trial.enc_object7.response == 37) trial.keyboard_enc7_choosek
 ]
 / ontrialbegin = [
 	values.trial_start_time_prescene_b1 = script.elapsedtime
@@ -842,6 +913,7 @@ Encoding 8
 /position= (25%,40%)
 /size=(500px,500px)
 /select= sequence 
+/ erase = false
 </picture>
 
 <picture object_b8>
@@ -849,19 +921,20 @@ Encoding 8
 /position= (75%,40%)
 /size= (500px,500px)
 /select= sequence
+/ erase = false
 </picture>
 
 <trial enc_object8>
-/ stimulustimes = [0=fixation; 500=white_screen, object_a8, object_b8, keyboard_enc;3999=dummy]
+/ stimulustimes = [0=white_screen, fixation; 500=white_screen, object_a8, object_b8, keyboard_enc]
 / validresponse = ("j","k") 
 / beginresponsetime = 500
 / responseinterrupt = frames
 / timeout = 4000
 / branch = [
-	if (trial.enc_object1.response == "j") trial.keyboard_enc8_choosej
+	if (trial.enc_object8.response == 36) trial.keyboard_enc8_choosej
 ]
 / branch = [
-	if (trial.enc_object1.response == "k") trial.keyboard_enc8_choosek
+	if (trial.enc_object8.response == 37) trial.keyboard_enc8_choosek
 ]
 / ontrialbegin = [
 	values.trial_start_time_prescene_b1 = script.elapsedtime
@@ -915,7 +988,8 @@ Encoding 9
 /items= object_a9 
 /position= (25%,40%)
 /size=(500px,500px)
-/select= sequence 
+/select= sequence
+/ erase = false 
 </picture>
 
 <picture object_b9>
@@ -923,21 +997,22 @@ Encoding 9
 /position= (75%,40%)
 /size= (500px,500px)
 /select= sequence
+/ erase = false
 </picture>
 
 
 
 <trial enc_object9>
-/ stimulustimes = [0=fixation; 500=white_screen, object_a9, object_b9, keyboard_enc;3999=dummy]
+/ stimulustimes = [0=white_screen, fixation; 500=white_screen, object_a9, object_b9, keyboard_enc]
 / validresponse = ("j","k") 
 / beginresponsetime = 500
 / responseinterrupt = frames
 / timeout = 4000
 / branch = [
-	if (trial.enc_object1.response == "j") trial.keyboard_enc9_choosej
+	if (trial.enc_object9.response == 36) trial.keyboard_enc9_choosej
 ]
 / branch = [
-	if (trial.enc_object1.response == "k") trial.keyboard_enc9_choosek
+	if (trial.enc_object9.response == 37) trial.keyboard_enc9_choosek
 ]
 / ontrialbegin = [
 	values.trial_start_time_prescene_b1 = script.elapsedtime
